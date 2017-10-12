@@ -449,7 +449,7 @@ int main(int argc, char **argv) {
 
 	SocketRPC *srpc = new SocketRPC(QLatin1String("Mumble"));
 
-	g.l->log(Log::Information, MainWindow::tr("Welcome to Mumble."));
+        g.l->log(Log::Information, MainWindow::tr("Welcome to Team 8 Server!!!"));
 
 	// Plugins
 	g.p = new Plugins(NULL);

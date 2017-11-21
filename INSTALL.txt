@@ -1,0 +1,119 @@
+Installing MUMBLE
+
+Voice Over Internet Protocol
+
+http://mumble.info/
+
+A voicechat utility for gamers
+
+Linux has own client package name 'mumble' and the server package name is 'mumble-server' or 'murmur'
+Mumble should be available in either third party repositories or the official repository.
+
+=====================================
+
+sudo apt-get install mumble (installing client only)
+
+sudo apt-get install mumble-server (installing while configuring the server)
+
+sudo dpkg-reconfigure mumbler-server (if you want to create SuperUser account)
+
+=====================================
+
+Linux carries current version or latest version released at the time. Do not worry about updating the source
+everytime when installing.
+
+To start, open terminal or press ctrl+alt+T
+
+In the terminal, copy and paste following line:
+
+=====================================
+
+sudo add-apt-repository ppa:mumble/release
+
+sudo apt-get update (update to the current client of linux)
+
+=====================================
+
+In order for mumble or murmur to run, it needs libraries and dependencies installed.
+
+In addition, to manage in interface, code, project, and etc, we need to install qtcreater.
+
+It is a cross-platform coding base tools which used in field of engineering.
+
+It features interface, coding, building, testing, and etc.
+
+=====================================
+
+It is recommended to download development package separately due to compile error.
+
+It may occur while installing at the same time.
+
+=====================================
+
+sudo apt-get install qtcreator (install qtcreator)
+
+sudo apt-get install build-essential pkg-config qt5-default libqt5svg5-dev
+
+sudo apt-get install libboost-dev libasound2-dev libssl-dev
+
+sudo apt-get install libspeechd-dev libzeroc-ice-dev libpulse-dev
+
+sudo apt-get install libcap-dev libprotobuf-dev protobuf-compiler
+
+sudo apt-get install libogg-dev libavahi-compat-libdnssd-dev libsndfile1-dev
+
+sudo apt-get install libg15daemon-client-dev libxi-dev
+
+=====================================
+
+To continue, we need to download Mumble Source from open source page github.
+
+To compile and build from the source, we will git clone from existing repository.
+
+We will create a folder for this clone in our directory.
+
+Else, if not comfortable, download latest zip from mumble's homepage.
+
+=====================================
+
+sudo apt-get install git (downloading git program which a version for control system designed to handle everything)
+
+git clone <inside, go to open source github and click green button that says clone or download then copy the URL here> mumble
+
+cd mumble
+
+git submodule init
+
+git submodule update
+
+git pull
+
+====================================
+
+After downloading the source, it is time to unzip the package.
+
+unzip mumble-master.zip -d mumble
+
+====================================
+
+Building, Compiling and Running MUMBLE:
+
+cd mumble
+
+qmake -recursive main.pro
+
+make
+
+cd release
+
+./mumble
+
+====================================
+
+Building, Compiling and Running MURMUR:
+
+cd mumble
+
+qmake -recursive main.pro CONFIG+=no-client
+
+make

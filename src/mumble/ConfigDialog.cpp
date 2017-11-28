@@ -35,9 +35,9 @@ ConfigDialog::ConfigDialog(QWidget *p) : QDialog(p) {
 	cancelButton->setWhatsThis(tr("This button will reject all changes and return to the application.<br />"
 	                              "The settings will be reset to the previous positions."));
 
-	QPushButton *applyButton = dialogButtonBox->button(QDialogButtonBox::Apply);
-	applyButton->setToolTip(tr("Apply changes"));
-	applyButton->setWhatsThis(tr("This button will immediately apply all changes."));
+//	QPushButton *applyButton = dialogButtonBox->button(QDialogButtonBox::Apply);
+//	applyButton->setToolTip(tr("Apply changes"));
+//	applyButton->setWhatsThis(tr("This button will immediately apply all changes."));
 
 	QPushButton *resetButton = pageButtonBox->button(QDialogButtonBox::Reset);
 	resetButton->setToolTip(tr("Undo changes for current page"));
@@ -120,10 +120,9 @@ void ConfigDialog::on_pageButtonBox_clicked(QAbstractButton *b) {
 
 void ConfigDialog::on_dialogButtonBox_clicked(QAbstractButton *b) {
 	switch (dialogButtonBox->standardButton(b)) {
-		case QDialogButtonBox::Apply: {
-				apply();
-				break;
-			}
+        case QDialogButtonBox::Ok: {
+            accept();
+    }
 		default:
 			break;
 	}
@@ -175,28 +174,28 @@ void ConfigDialog::updateListView() {
 		qlwIcons->setCurrentRow(0);
 }
 
-void ConfigDialog::apply() {
-	Audio::stop();
+//void ConfigDialog::apply() {
 
-	foreach(ConfigWidget *cw, qmWidgets)
-		cw->save();
-
-	g.s = s;
-
-	foreach(ConfigWidget *cw, qmWidgets)
-		cw->accept();
-	
-	if (!g.s.bAttenuateOthersOnTalk)
-		g.bAttenuateOthers = false;
-
-	// They might have changed their keys.
-	g.iPushToTalk = 0;
-
-	Audio::start();
-}
+//}
 
 void ConfigDialog::accept() {
-	apply();
+    Audio::stop();
+
+    foreach(ConfigWidget *cw, qmWidgets)
+        cw->save();
+
+    g.s = s;
+
+    foreach(ConfigWidget *cw, qmWidgets)
+        cw->accept();
+
+    if (!g.s.bAttenuateOthersOnTalk)
+        g.bAttenuateOthers = false;
+
+    // They might have changed their keys.
+    g.iPushToTalk = 0;
+
+    Audio::start();
 
 	if (! g.ocIntercept)
 		g.s.qbaConfigGeometry=saveGeometry();

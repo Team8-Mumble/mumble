@@ -32,6 +32,8 @@ class ConfigDialog : public QDialog, public Ui::ConfigDialog {
 		void on_qlwIcons_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 		void apply();
 		void accept() Q_DECL_OVERRIDE;
+private slots:
+        void on_dialogButtonBox_accepted();
 };
 
 #endif

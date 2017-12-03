@@ -94,7 +94,7 @@ class MainWindow : public QMainWindow, public MessageHandler, public Ui::MainWin
 
 		bool bSuppressAskOnQuit;
 		/// Restart the client after shutdown
-		bool restartOnQuit;
+        bool restartOnQuit;
 		bool bAutoUnmute;
 
 		/// Contains the cursor whose position is immediately before the image to

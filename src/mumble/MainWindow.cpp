@@ -111,7 +111,7 @@ MainWindow::MainWindow(QWidget *p) : QMainWindow(p) {
 	uiNewHardware = 1;
 #endif
 	bSuppressAskOnQuit = false;
-	restartOnQuit = false;
+    restartOnQuit = false;
 	bAutoUnmute = false;
 
 	Channel::add(0, tr("Root"));
@@ -2377,7 +2377,7 @@ void MainWindow::on_qaAudioUnlink_triggered() {
 void MainWindow::on_qaConfigDialog_triggered() {
 	QDialog *dlg = new ConfigDialog(this);
 
-	if (dlg->exec() == QDialog::Accepted) {
+    if (dlg->exec() == QDialog::Accepted) {
 		setupView(false);
 		updateTransmitModeComboBox();
 		updateTrayIcon();
@@ -2386,13 +2386,13 @@ void MainWindow::on_qaConfigDialog_triggered() {
 		um->toggleChannelFiltered(NULL); // force a UI refresh
 		
 		if (g.s.requireRestartToApply) {
-			if (g.s.requireRestartToApply && QMessageBox::question(
+            if (g.s.requireRestartToApply && QMessageBox::question(
 				        this,
 				        tr("Restart Mumble?"),
 				        tr("Some settings will only apply after a restart of Mumble. Restart Mumble now?"),
 				        QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes) {
 		
-				bSuppressAskOnQuit = true;
+                bSuppressAskOnQuit = true;
 				restartOnQuit = true;
 				
 				close();

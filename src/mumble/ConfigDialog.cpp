@@ -11,7 +11,10 @@
 #include "AudioOutput.h"
 #include "Global.h"
 #include "Overlay.h"
+#include "MainWindow.h"
 
+QPushButton *okButton;
+extern bool restartOnQuit=false;
 ConfigDialog::ConfigDialog(QWidget *p) : QDialog(p) {
 	setupUi(this);
 
@@ -35,9 +38,9 @@ ConfigDialog::ConfigDialog(QWidget *p) : QDialog(p) {
 	cancelButton->setWhatsThis(tr("This button will reject all changes and return to the application.<br />"
 	                              "The settings will be reset to the previous positions."));
 
-//	QPushButton *applyButton = dialogButtonBox->button(QDialogButtonBox::Apply);
-//	applyButton->setToolTip(tr("Apply changes"));
-//	applyButton->setWhatsThis(tr("This button will immediately apply all changes."));
+    QPushButton *applyButton = dialogButtonBox->button(QDialogButtonBox::Apply);
+    applyButton->setToolTip(tr("Apply changes"));
+    applyButton->setWhatsThis(tr("This button will immediately apply all changes."));
 
 	QPushButton *resetButton = pageButtonBox->button(QDialogButtonBox::Reset);
 	resetButton->setToolTip(tr("Undo changes for current page"));
@@ -120,9 +123,14 @@ void ConfigDialog::on_pageButtonBox_clicked(QAbstractButton *b) {
 
 void ConfigDialog::on_dialogButtonBox_clicked(QAbstractButton *b) {
 	switch (dialogButtonBox->standardButton(b)) {
+        case QDialogButtonBox::Apply: {
+            apply();
+            break;
+        }
         case QDialogButtonBox::Ok: {
-            accept();
-    }
+            apply();
+            break;
+        }
 		default:
 			break;
 	}
@@ -174,21 +182,25 @@ void ConfigDialog::updateListView() {
 		qlwIcons->setCurrentRow(0);
 }
 
-//void ConfigDialog::apply() {
-
-//}
-
-void ConfigDialog::accept() {
+void ConfigDialog::apply() {
     Audio::stop();
+    if (g.s.requireRestartToApply && QMessageBox::question(
+                this,
+                tr("Restart Mumble?"),
+                tr("exterome settings will only apply after a restart of Mumble. Restart Mumble now?"),
+                QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes) {
 
+        restartOnQuit = true;
+        okButton->animateClick();
+    }
     foreach(ConfigWidget *cw, qmWidgets)
         cw->save();
 
     g.s = s;
 
+
     foreach(ConfigWidget *cw, qmWidgets)
         cw->accept();
-
     if (!g.s.bAttenuateOthersOnTalk)
         g.bAttenuateOthers = false;
 
@@ -196,7 +208,10 @@ void ConfigDialog::accept() {
     g.iPushToTalk = 0;
 
     Audio::start();
+    accept();
+}
 
+void ConfigDialog::accept() {
 	if (! g.ocIntercept)
 		g.s.qbaConfigGeometry=saveGeometry();
 

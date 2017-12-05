@@ -1,0 +1,89 @@
+M	U	M	B	L	E
+
+Voice	Over	Internet	Protocol
+
+http://mumble.info/
+
+A voicechat utility for gamers
+
+=========================================
+
+Access Control Lists, Groups and Properties in Mumble allows user to change/edit settings in any channel and give deny/allow permission.
+In order to do so, user must login to the Mumble using SuperUser Account.
+
+=========================================
+
+To start, connect to your server then create Root Channel.
+By right clicking on Root Channel, you will see list of menu bar.
+After, clicking 'edit' will display 3 section on Properties, Groups and ACL.
+
+=========================================
+
+ACL are linked to a specific channel.
+It can inherit the ACL on Root or Sub.
+When connected to the server, it will show all the entries active Root Channel.
+For each entries, permissions either allowed or denied.
+In this case, only SuperUser is applied to edit.
+Each entry can be marked to apply in current, sub or both channels.
+
+=========================================
+
+ACL Permission Definition (Deny/Allow)
+
+Write
+It takes control over any channel the ability to edit.
+
+Traverse
+It takes control on having privilege to access any channel.
+
+Enter
+It takes control on other user to enter any channel.
+
+Speak
+It takes control on the user's ability to speak.
+
+Mute/Deafen
+It takes control over user's status on speak or hear.
+
+Move / Kick
+It allows any user to move from channel to channel or kick them from the server.
+
+Make Channel
+It allows any user to make Sub Channel inside Root Channel.
+
+Link Channel
+It allows any user to link, unlink or push link channel.
+
+Whisper
+It allows any user to whipser with user-to-user inside any channel.
+
+Text Message
+It allows any user to write text message.
+
+Make Temporary
+It allows any user to make temporary Sub Channel inside Root channel.
+
+Ban
+It allows any user to ban the user they hate or feel uncomfortable.
+
+Register User
+It allows any user to register the channel of both channel.
+
+Register Self
+It allows any user to register self in both channel.
+
+=========================================
+
+Groups are tied to a specific channel.
+It can select as inherit, inheritable, or inherited.
+In addition, it can either members, exclude or inherit members.
+Members represent the list of players to add to the group.
+Inherit represent the list of members inherited from the same group in the Root Channel.
+Exclude represents the list of inherited members to remove from the group.
+By using this section, the user can easier manage members in any channel.
+
+=========================================
+
+Properties are only associated to specific channel.
+In this section, the user can edit name of channel,
+write description about the channel set password to the channel and give position on the channel.

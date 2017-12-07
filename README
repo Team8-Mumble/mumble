@@ -67,8 +67,6 @@ To set the superuser password, run murmur with the parameters '-supw <password>'
 Bandwidth usage
 ===============
 
-Bandwidth usage
-
 Mumble uses 15 - 144 kbits/s incoming and outgoing when transmitting speech.
 This is partly dependent on the compression scheme chosen: when the default 40 Kbps is used, sent data remains about 40 Kbps 
 while received data is around half that for one stream.

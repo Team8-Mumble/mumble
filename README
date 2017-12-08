@@ -67,7 +67,9 @@ To set the superuser password, run murmur with the parameters '-supw <password>'
 Bandwidth usage
 ===============
 
-Mumble uses between 8 and 144 Kbps when transmitting speech.  This is partly dependent on the compression scheme chosen (Settings > Audio Input > Compression).  The default setting results in a bandwidth requirement of 54.8 Kbps / stream.
+Mumble uses between 8 and 144 Kbps when transmitting speech.  This is partly dependent on the 
+compression scheme chosen (Settings > Audio Input > Compression).  The default setting results in a 
+bandwidth requirement of 54.8 Kbps / stream.
  
 The Mumble client will need your configured bandwidth outgoing, and an
 appropriate amount incoming based on the number of users talking and the
@@ -78,6 +80,10 @@ bandwidth to handle all the streams from each client speaking, as
 well as enough outgoing bandwidth to transmit those streams to the
 other users in the channel.
  
-Moreover, since Mumble is geared towards social gaming, the bit rates will be higher like above, because people will be talking continuously and also at the same time, rather than speaking short phrases or commands depending on quality settings.
+Moreover, since Mumble is geared towards social gaming, the bit rates will be higher like above,
+because people will be talking continuously and also at the same time, rather than speaking short 
+phrases or commands depending on quality settings.
  
-To be more specific, if there are 10 users in a channel, your incoming bandwidth requirement will be (10 * 144 Kbps  = 1440 Kbps).  For the outgoing bandwidth, the maximum requirement in your server will be (144 Kbps * 9 users * 10 streams = 12960 Kbps).
+To be more specific, if there are 10 users in a channel, your incoming bandwidth requirement will 
+be (10 * 144 Kbps  = 1440 Kbps).  For the outgoing bandwidth, the maximum requirement in your server 
+will be (144 Kbps * 9 users * 10 streams = 12960 Kbps).

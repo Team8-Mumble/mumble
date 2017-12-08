@@ -1,89 +1,88 @@
 M	U	M	B	L	E
 
-Voice	Over	Internet	Protocol
+Voice over Internet Protocol
 
 http://mumble.info/
 
-A voicechat utility for gamers
+A voice chat utility for gamers.
 
 =========================================
 
-Access Control Lists, Groups and Properties in Mumble allows user to change/edit settings in any channel and give deny/allow permission.
-In order to do so, user must login to the Mumble using SuperUser Account.
+Access Control Lists (ACLs), Groups, and Properties in Mumble allow users to edit the settings in any channel and provide allow/deny permissions.
+In order to do so, the user must log into Mumble using the SuperUser Account.
 
 =========================================
 
-To start, connect to your server then create Root Channel.
-By right clicking on Root Channel, you will see list of menu bar.
-After, clicking 'edit' will display 3 section on Properties, Groups and ACL.
+To start, connect to your server and create Root Channel.
+By right-clicking on Root Channel, a drop-down of options will appear.
+After clicking 'edit,' a new dialog will display 3 tabs on Properties, Groups and ACL.
 
 =========================================
 
-ACL are linked to a specific channel.
-It can inherit the ACL on Root or Sub.
-When connected to the server, it will show all the entries active Root Channel.
-For each entries, permissions either allowed or denied.
-In this case, only SuperUser is applied to edit.
-Each entry can be marked to apply in current, sub or both channels.
+ACLs are linked to specific channels.
+It can inherit the ACL from the parent channel.
+When connected to the server, it will show all the entries under the Root Channel.
+For each entry, the permission is either allowed or denied.
+Initially, only the SuperUser is allowed to edit.
+Each entry can be checked off to apply in the current channel(only), sub-channel(only) or both.
 
 =========================================
 
-ACL Permission Definition (Deny/Allow)
+ACL Permissions Explained (Deny/Allow)
 
 Write
-It takes control over any channel the ability to edit.
+Allows a user to make a new channel under the root channel on the server.
 
 Traverse
-It takes control on having privilege to access any channel.
+It takes control over whether a user has the privilege to access any channel.
 
 Enter
-It takes control on other user to enter any channel.
+Allows or denies a user's ability to go into a channel.
 
 Speak
-It takes control on the user's ability to speak.
+It takes control over the user's ability to speak.
 
 Mute/Deafen
-It takes control over user's status on speak or hear.
+It takes control over the user's ability to mute other users.
 
 Move / Kick
-It allows any user to move from channel to channel or kick them from the server.
+It allows any user to move another user from channel-to-channel or kick them from the server.
 
 Make Channel
-It allows any user to make Sub Channel inside Root Channel.
+It allows any user to make a sub-channel inside the root channel.
 
 Link Channel
-It allows any user to link, unlink or push link channel.
+It allows any user to attach another channel to their channel.
 
 Whisper
-It allows any user to whipser with user-to-user inside any channel.
+It allows any user to privately chat with another user inside any channel.
 
 Text Message
-It allows any user to write text message.
+It allows any user to write a text message.
 
 Make Temporary
-It allows any user to make temporary Sub Channel inside Root channel.
+It allows any user to make a temporary sub-channel inside the Root channel.
 
 Ban
-It allows any user to ban the user they hate or feel uncomfortable.
+It allows any user to remove another user from their channel and that user cannot rejoin.
 
 Register User
-It allows any user to register the channel of both channel.
+It allows any user to join another user's channel.
 
 Register Self
-It allows any user to register self in both channel.
+It allows any user to join their own channel.
 
 =========================================
 
 Groups are tied to a specific channel.
-It can select as inherit, inheritable, or inherited.
-In addition, it can either members, exclude or inherit members.
+Groups can inherit future groups or be inherited by another existing group. This is so ACL permissions on the parent group also edit the permissions on the inherited groups.
 Members represent the list of players to add to the group.
-Inherit represent the list of members inherited from the same group in the Root Channel.
+Inherit represents the list of members inherited from the same group in the Root Channel.
 Exclude represents the list of inherited members to remove from the group.
-By using this section, the user can easier manage members in any channel.
+By using this section, the user can easily manage members in any channel.
 
 =========================================
 
-Properties are only associated to specific channel.
-In this section, the user can edit name of channel,
-write description about the channel set password to the channel and give position on the channel.
+Properties are only associated to a specific channel.
+In this section, the user can edit the name of the channel,
+write description about the channel, set password to the channel, and give position on the channel.

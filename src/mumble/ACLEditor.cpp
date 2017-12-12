@@ -585,10 +585,10 @@ void ACLEditor::ACLEnableCheck() {
 
 	for (int idx = 0; idx < qlACLAllow.count(); idx++) {
 		// Only enable other checkboxes if writeacl isn't set
-		bool enablethis = enabled && (qlPerms[idx] == ChanACL::Write || !(as && (as->pAllow & ChanACL::Write)) || qlPerms[idx] == ChanACL::Speak);
-		qlACLAllow[idx]->setEnabled(enablethis);
-		qlACLDeny[idx]->setEnabled(enablethis);
-	}
+                bool enablethis = enabled && (qlPerms[idx] == ChanACL::Write || !(as && (as->pAllow & ChanACL::Write)) || qlPerms[idx] == ChanACL::Speak);
+
+
+        }
 
 	if (as) {
 		qcbACLApplyHere->setChecked(as->bApplyHere);
@@ -597,7 +597,7 @@ void ACLEditor::ACLEnableCheck() {
 		for (int idx = 0; idx < qlACLAllow.count(); idx++) {
 			ChanACL::Perm p = qlPerms[idx];
 			qlACLAllow[idx]->setChecked(as->pAllow & p);
-			qlACLDeny[idx]->setChecked(as->pDeny & p);
+                        qlACLDeny[idx]->setChecked(as->pDeny & p);
 		}
 
 		qcbACLGroup->clear();
@@ -629,6 +629,8 @@ void ACLEditor::ACLEnableCheck() {
 			qpb->setDefault(false);
 		}
 	}
+        ACLPermissions_clicked();
+
 }
 
 void ACLEditor::on_qtwTab_currentChanged(int index) {
@@ -714,6 +716,7 @@ void ACLEditor::updatePasswordACL() {
 }
 
 void ACLEditor::on_qlwACLs_currentRowChanged() {
+
 	ACLEnableCheck();
 }
 
@@ -742,7 +745,7 @@ void ACLEditor::on_qpbACLRemove_clicked() {
 }
 
 void ACLEditor::on_qpbACLUp_clicked() {
-	ChanACL *as = currentACL();
+        ChanACL *as = currentACL();
 	if (! as || as->bInherited)
 		return;
 
@@ -834,10 +837,10 @@ void ACLEditor::ACLPermissions_clicked() {
 	if (! as || as->bInherited)
 		return;
 
-	int allowed = 0;
-	int denied = 0;
+        int allowed = 0;
+        int denied = 0;
 
-	bool enabled = true;
+        bool enabled = true;
 	for (int idx = 0; idx < qlACLAllow.count(); idx++) {
 		ChanACL::Perm p = qlPerms[idx];
 		if (qlACLAllow[idx]->isChecked() && qlACLDeny[idx]->isChecked()) {
@@ -848,9 +851,9 @@ void ACLEditor::ACLPermissions_clicked() {
 		}
 
 		qlACLAllow[idx]->setEnabled(enabled || p == ChanACL::Speak);
-		qlACLDeny[idx]->setEnabled(enabled || p == ChanACL::Speak);
+                qlACLDeny[idx]->setEnabled(enabled || p == ChanACL::Speak);
 
-		if (p == ChanACL::Write && qlACLAllow[idx]->isChecked())
+                if (qlACLAllow[idx]->isChecked())
 			enabled = false;
 
 		if (qlACLAllow[idx]->isChecked())

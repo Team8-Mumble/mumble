@@ -186,6 +186,34 @@
    <addaction name="separator"/>
    <addaction name="qaFilterToggle"/>
   </widget>
+<action name="qaOpenMum">
+   <property name="text">
+    <string>&amp;Open Mumble</string>
+   </property>
+   <property name="toolTip">
+    <string>Opens the program</string>
+   </property>
+   <property name="whatsThis">
+    <string>Opens the application.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
+  </action>
+<action name="qaMinMum">
+   <property name="text">
+    <string>&amp;Minimize Mumble</string>
+   </property>
+   <property name="toolTip">
+    <string>Minimize the program</string>
+   </property>
+   <property name="whatsThis">
+    <string>Minimizes the application.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
   <action name="qaQuit">
    <property name="text">
     <string>&amp;Quit Mumble</string>
@@ -198,6 +226,20 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
+   </property>
+  </action>
+<action name="qaSuperUser">
+   <property name="text">
+    <string>&amp;Edit SU Options</string>
+   </property>
+   <property name="toolTip">
+    <string>Edit Super User Settings</string>
+   </property>
+   <property name="whatsThis">
+    <string>Edits SU</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+M</string>
    </property>
   </action>
   <action name="qaHide">

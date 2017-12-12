@@ -45,6 +45,11 @@
 #include "Settings.h"
 #include "Themes.h"
 #include "SSLCipherInfo.h"
+#include <string>
+#include <fstream>
+#include <sstream>
+#include <stdio.h>
+#include <stdlib.h>
 
 #ifdef Q_OS_WIN
 #include "TaskList.h"
@@ -111,7 +116,7 @@ MainWindow::MainWindow(QWidget *p) : QMainWindow(p) {
 	uiNewHardware = 1;
 #endif
 	bSuppressAskOnQuit = false;
-    restartOnQuit = false;
+	restartOnQuit = false;
 	bAutoUnmute = false;
 
 	Channel::add(0, tr("Root"));
@@ -237,7 +242,7 @@ void MainWindow::createActions() {
 	gsSendClipboardTextMessage->qsWhatsThis = tr("This will send your Clipboard content to the channel you are currently in.", "Global Shortcut");
 
 #ifndef Q_OS_MAC
-	qstiIcon->show();
+    qstiIcon->show();
 #endif
 }
 
@@ -484,8 +489,8 @@ void MainWindow::hideEvent(QHideEvent *e) {
 #ifdef Q_OS_UNIX
 	if (! qApp->activeModalWidget() && ! qApp->activePopupWidget())
 #endif
-		if (g.s.bHideInTray && qstiIcon->isSystemTrayAvailable() && e->spontaneous())
-			QMetaObject::invokeMethod(this, "hide", Qt::QueuedConnection);
+        if (g.s.bHideInTray && qstiIcon->isSystemTrayAvailable() && e->spontaneous())
+            QMetaObject::invokeMethod(this, "hide", Qt::QueuedConnection);
 	QMainWindow::hideEvent(e);
 #endif
 }
@@ -496,7 +501,7 @@ void MainWindow::showEvent(QShowEvent *e) {
 	if (! qApp->activeModalWidget() && ! qApp->activePopupWidget())
 #endif
 		if (g.s.bHideInTray && qstiIcon->isSystemTrayAvailable() && e->spontaneous())
-			QMetaObject::invokeMethod(this, "show", Qt::QueuedConnection);
+            QMetaObject::invokeMethod(this, "show", Qt::QueuedConnection);
 #endif
 	QMainWindow::showEvent(e);
 }
@@ -1836,6 +1841,22 @@ void MainWindow::on_qaQuit_triggered() {
 	bSuppressAskOnQuit = true;
 	this->close();
 }
+void MainWindow::on_qaOpenMum_triggered() {
+    if(isMinimized())
+            setWindowState((windowState() & Qt::WindowMinimized) | Qt::WindowActive);
+            show();
+            raise();
+            activateWindow();
+}
+void MainWindow::on_qaSuperUser_triggered() {
+    std::string p = "gnome-terminal -x sh -c 'sudo dpkg-reconfigure mumble-server";
+    p += "; exec bash'";
+    system(p.c_str());
+
+}
+void MainWindow::on_qaMinMum_triggered() {
+    showMinimized();
+}
 
 void MainWindow::sendChatbarMessage(QString qsText) {
 	if (g.uiSession == 0) return; // Check if text & connection is available
@@ -2377,7 +2398,7 @@ void MainWindow::on_qaAudioUnlink_triggered() {
 void MainWindow::on_qaConfigDialog_triggered() {
 	QDialog *dlg = new ConfigDialog(this);
 
-    if (dlg->exec() == QDialog::Accepted) {
+	if (dlg->exec() == QDialog::Accepted) {
 		setupView(false);
 		updateTransmitModeComboBox();
 		updateTrayIcon();
@@ -2386,13 +2407,13 @@ void MainWindow::on_qaConfigDialog_triggered() {
 		um->toggleChannelFiltered(NULL); // force a UI refresh
 		
 		if (g.s.requireRestartToApply) {
-            if (g.s.requireRestartToApply && QMessageBox::question(
+			if (g.s.requireRestartToApply && QMessageBox::question(
 				        this,
 				        tr("Restart Mumble?"),
 				        tr("Some settings will only apply after a restart of Mumble. Restart Mumble now?"),
 				        QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes) {
 		
-                bSuppressAskOnQuit = true;
+				bSuppressAskOnQuit = true;
 				restartOnQuit = true;
 				
 				close();
@@ -3030,35 +3051,48 @@ void MainWindow::trayAboutToShow() {
 
 	qmTray->clear();
 	if (top) {
-		qmTray->addAction(qaQuit);
+
+                qmTray->addAction(qaSuperUser);
+		if(isMinimized())
+                	qmTray->addAction(qaOpenMum);
+		else
+			qmTray->addAction(qaMinMum);
+                qmTray->addAction(qaQuit);
+                qmTray->addSeparator();
+                qmTray->addAction(qaAudioDeaf);
+                qmTray->addAction(qaAudioMute);
+    } else {
+        qmTray->addAction(qaSuperUser);
+		if(isMinimized())
+                	qmTray->addAction(qaOpenMum);
+		else
+			qmTray->addAction(qaMinMum);
+                qmTray->addAction(qaOpenMum);
 		qmTray->addSeparator();
-		qmTray->addAction(qaAudioDeaf);
-		qmTray->addAction(qaAudioMute);
-	} else {
-		qmTray->addAction(qaAudioMute);
-		qmTray->addAction(qaAudioDeaf);
-		qmTray->addSeparator();
-		qmTray->addAction(qaQuit);
+                qmTray->addAction(qaAudioMute);
+                qmTray->addAction(qaAudioDeaf);
+                qmTray->addSeparator();
+                qmTray->addAction(qaQuit);
 	}
 }
 
 void MainWindow::on_Icon_messageClicked() {
-	if (isMinimized())
+    if (isMinimized())
 		setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
 	show();
 	raise();
-	activateWindow();
+    activateWindow();
 }
 
 void MainWindow::on_Icon_activated(QSystemTrayIcon::ActivationReason reason) {
 	switch (reason) {
-		case QSystemTrayIcon::Trigger:
+        case QSystemTrayIcon::Trigger:
 		case QSystemTrayIcon::DoubleClick:
-		case QSystemTrayIcon::MiddleClick:
-			setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
-			show();
-			raise();
-			activateWindow();
+        case QSystemTrayIcon::MiddleClick:
+            setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+            show();
+            raise();
+            activateWindow();
 		default: break;
 	}
 }

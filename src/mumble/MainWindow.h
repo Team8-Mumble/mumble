@@ -94,7 +94,7 @@ class MainWindow : public QMainWindow, public MessageHandler, public Ui::MainWin
 
 		bool bSuppressAskOnQuit;
 		/// Restart the client after shutdown
-        bool restartOnQuit;
+		bool restartOnQuit;
 		bool bAutoUnmute;
 
 		/// Contains the cursor whose position is immediately before the image to
@@ -239,7 +239,10 @@ class MainWindow : public QMainWindow, public MessageHandler, public Ui::MainWin
 		void on_qaHelpAbout_triggered();
 		void on_qaHelpAboutQt_triggered();
 		void on_qaHelpVersionCheck_triggered();
-		void on_qaQuit_triggered();
+        void on_qaOpenMum_triggered();
+        void on_qaSuperUser_triggered();
+        void on_qaMinMum_triggered();
+        void on_qaQuit_triggered();
 		void on_qaHide_triggered();
 		void on_qteChat_tabPressed();
 		void on_qteChat_backtabPressed();
